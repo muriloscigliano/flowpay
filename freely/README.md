@@ -115,6 +115,12 @@ Frontend will be available at: http://localhost:3000
 - ✅ Category management
 - ✅ Product search and filtering
 - ✅ Pagination support
+- ✅ Shopping cart (session-based and user-based)
+- ✅ Cart item management (add, update, remove)
+- ✅ Order creation from cart
+- ✅ Stripe PaymentIntent integration
+- ✅ Order management and history
+- ✅ Price snapshots in cart/orders
 - ✅ Async SQLAlchemy 2.0
 - ✅ Alembic migrations
 - ✅ RESTful API with FastAPI
@@ -129,16 +135,14 @@ Frontend will be available at: http://localhost:3000
 - ✅ Product creation form
 - ✅ Search and category filtering
 - ✅ Pagination controls
+- ✅ Shopping cart page
+- ✅ Cart management (view, update quantities, remove)
+- ✅ Cart state management with composables
 - ✅ Auth state management
 - ✅ Protected routes
 - ✅ Responsive design
 
 ### Roadmap 🚧
-
-**Week 3:**
-- Shopping cart
-- Stripe integration
-- Checkout flow
 
 **Week 4:**
 - Customer portal
