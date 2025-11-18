@@ -9,16 +9,19 @@
         </div>
 
         <div class="flex items-center gap-3">
-          <NuxtLink
-            to="/chat"
-            class="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
+          <NuxtLink to="/cart" class="relative px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <span>Cart</span>
+            <span v-if="cartItemCount > 0" class="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs font-bold rounded-full flex items-center justify-center">
+              {{ cartItemCount }}
+            </span>
+          </NuxtLink>
+          <NuxtLink to="/orders" class="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+            Orders
+          </NuxtLink>
+          <NuxtLink to="/chat" class="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
             Chat
           </NuxtLink>
-          <NuxtLink
-            to="/products/new"
-            class="px-4 py-2 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-all"
-          >
+          <NuxtLink to="/products/new" class="px-4 py-2 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-all">
             Add Product
           </NuxtLink>
         </div>
@@ -98,11 +101,10 @@
         <div
           v-for="product in products"
           :key="product.id"
-          class="bg-card rounded-4xl border border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-          @click="navigateTo(`/products/${product.id}`)"
+          class="bg-card rounded-4xl border border-border overflow-hidden hover:shadow-lg transition-shadow"
         >
           <!-- Product Image -->
-          <div class="aspect-square bg-muted flex items-center justify-center">
+          <div class="aspect-square bg-muted flex items-center justify-center cursor-pointer" @click="navigateTo(`/products/${product.id}`)">
             <img
               v-if="product.image_urls && product.image_urls[0]"
               :src="product.image_urls[0]"
@@ -127,7 +129,7 @@
 
           <!-- Product Info -->
           <div class="p-4">
-            <div class="flex items-start justify-between mb-2">
+            <div class="flex items-start justify-between mb-2 cursor-pointer" @click="navigateTo(`/products/${product.id}`)">
               <h3 class="font-semibold text-foreground truncate flex-1">{{ product.name }}</h3>
               <span
                 v-if="!product.is_available"
@@ -137,16 +139,33 @@
               </span>
             </div>
 
-            <p v-if="product.description" class="text-sm text-muted-foreground mb-3 line-clamp-2">
+            <p v-if="product.description" class="text-sm text-muted-foreground mb-3 line-clamp-2 cursor-pointer" @click="navigateTo(`/products/${product.id}`)">
               {{ product.description }}
             </p>
 
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between mb-3">
               <span class="text-lg font-bold text-primary">{{ product.price_display }}</span>
               <span v-if="product.stock_available !== null" class="text-xs text-muted-foreground">
                 {{ product.stock_available }} in stock
               </span>
             </div>
+
+            <!-- Add to Cart Button -->
+            <button
+              @click="handleAddToCart(product)"
+              :disabled="!product.is_available || addingToCart === product.id"
+              class="w-full py-2 px-4 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm"
+            >
+              <span v-if="addingToCart === product.id" class="flex items-center justify-center">
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Adding...
+              </span>
+              <span v-else-if="!product.is_available">Out of Stock</span>
+              <span v-else>Add to Cart</span>
+            </button>
 
             <!-- Categories -->
             <div v-if="product.categories && product.categories.length > 0" class="mt-3 flex flex-wrap gap-2">
@@ -209,9 +228,12 @@ const {
   fetchCategories,
 } = useProducts()
 
+const { addToCart, fetchCart, itemCount: cartItemCount } = useCart()
+
 const searchQuery = ref('')
 const selectedCategory = ref('')
 const availabilityFilter = ref('')
+const addingToCart = ref<string | null>(null)
 
 const totalPages = computed(() => Math.ceil(totalProducts.value / pageSize.value))
 
@@ -219,7 +241,20 @@ const totalPages = computed(() => Math.ceil(totalProducts.value / pageSize.value
 onMounted(async () => {
   await fetchCategories()
   await fetchProducts()
+  await fetchCart()
 })
+
+// Handle add to cart
+const handleAddToCart = async (product: any) => {
+  addingToCart.value = product.id
+  const success = await addToCart(product.id, 1)
+  addingToCart.value = null
+
+  if (success) {
+    // Show success feedback (could be a toast notification)
+    console.log(`Added ${product.name} to cart`)
+  }
+}
 
 // Handle search with debounce
 let searchTimeout: NodeJS.Timeout

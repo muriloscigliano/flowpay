@@ -119,8 +119,11 @@ Frontend will be available at: http://localhost:3000
 - ✅ Cart item management (add, update, remove)
 - ✅ Order creation from cart
 - ✅ Stripe PaymentIntent integration
+- ✅ Stripe webhook handler for payment confirmation
 - ✅ Order management and history
 - ✅ Price snapshots in cart/orders
+- ✅ Payment status tracking (pending, paid, failed, refunded)
+- ✅ Fulfillment status tracking
 - ✅ Async SQLAlchemy 2.0
 - ✅ Alembic migrations
 - ✅ RESTful API with FastAPI
@@ -138,8 +141,11 @@ Frontend will be available at: http://localhost:3000
 - ✅ Shopping cart page
 - ✅ Cart management (view, update quantities, remove)
 - ✅ Cart state management with composables
+- ✅ Add to cart from products page
+- ✅ Cart item count badge in header
 - ✅ Customer order portal (order history)
 - ✅ Order detail page with full information
+- ✅ Order confirmation page after checkout
 - ✅ Order status displays (payment, fulfillment)
 - ✅ useOrders composable for order management
 - ✅ Auth state management
@@ -149,12 +155,13 @@ Frontend will be available at: http://localhost:3000
 ### Roadmap 🚧
 
 **Future Enhancements:**
-- Stripe Elements payment form frontend
-- Order confirmation page after checkout
-- Email notifications for orders
-- Admin order fulfillment dashboard
-- Webhook handling for payment events
-- Subscriptions
+- Stripe Elements payment form (for custom checkout UI)
+- Email notifications (order confirmation, shipping updates)
+- Admin dashboard for order fulfillment
+- Inventory management interface
+- Analytics and reporting
+- Subscriptions and recurring billing
+- Product reviews and ratings
 
 **Week 5:**
 - Analytics dashboard
