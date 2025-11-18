@@ -111,6 +111,10 @@ Frontend will be available at: http://localhost:3000
 - ✅ AI chat with Claude 3.5 Sonnet
 - ✅ Conversation history management
 - ✅ Message persistence
+- ✅ Product catalog (CRUD operations)
+- ✅ Category management
+- ✅ Product search and filtering
+- ✅ Pagination support
 - ✅ Async SQLAlchemy 2.0
 - ✅ Alembic migrations
 - ✅ RESTful API with FastAPI
@@ -121,16 +125,15 @@ Frontend will be available at: http://localhost:3000
 - ✅ Login/Register pages
 - ✅ Chat interface with AI
 - ✅ Real-time message UI
+- ✅ Products listing page with grid view
+- ✅ Product creation form
+- ✅ Search and category filtering
+- ✅ Pagination controls
 - ✅ Auth state management
 - ✅ Protected routes
 - ✅ Responsive design
 
 ### Roadmap 🚧
-
-**Week 2:**
-- Product catalog (CRUD)
-- Product search and filtering
-- Category management
 
 **Week 3:**
 - Shopping cart
@@ -164,11 +167,16 @@ freely/
 │   │   ├── agent/          # AI agent module
 │   │   │   ├── claude.py       # Claude API client
 │   │   │   └── service.py      # Agent orchestration
+│   │   ├── product/        # Product catalog module
+│   │   │   ├── endpoints.py    # Product & Category routes
+│   │   │   ├── service.py      # Product business logic
+│   │   │   └── schemas.py      # Pydantic models
 │   │   ├── models/         # Database models
 │   │   │   ├── base.py         # Base model classes
 │   │   │   ├── user.py         # User & UserSession
 │   │   │   ├── organization.py # Organization
-│   │   │   └── chat.py         # Conversation & Message
+│   │   │   ├── chat.py         # Conversation & Message
+│   │   │   └── product.py      # Product & Category
 │   │   ├── kit/            # Utilities
 │   │   │   ├── db.py           # Database utilities
 │   │   │   └── crypto.py       # Password/token hashing
@@ -185,12 +193,16 @@ freely/
     │   │   ├── index.vue       # Home page (redirects)
     │   │   ├── login.vue       # Login page
     │   │   ├── register.vue    # Register page
-    │   │   └── chat.vue        # Chat interface
+    │   │   ├── chat.vue        # Chat interface
+    │   │   └── products/
+    │   │       ├── index.vue   # Products listing
+    │   │       └── new.vue     # Create product form
     │   └── middleware/
     │       └── auth.ts         # Auth middleware
     ├── composables/
     │   ├── useAuth.ts          # Auth state management
-    │   └── useChat.ts          # Chat state management
+    │   ├── useChat.ts          # Chat state management
+    │   └── useProducts.ts      # Product catalog management
     ├── assets/
     │   └── styles/
     │       └── globals.css     # OKLCH color system
@@ -214,6 +226,22 @@ freely/
 - `GET /v1/chat/conversations` - List user's conversations
 - `GET /v1/chat/conversations/{id}` - Get conversation by ID
 - `POST /v1/chat/send` - Send message and get AI response
+
+### Products
+
+- `POST /v1/products` - Create new product
+- `GET /v1/products` - List products (with pagination, search, filtering)
+- `GET /v1/products/{id}` - Get product by ID
+- `PATCH /v1/products/{id}` - Update product
+- `DELETE /v1/products/{id}` - Delete product (soft delete)
+
+### Categories
+
+- `POST /v1/products/categories` - Create new category
+- `GET /v1/products/categories` - List all categories
+- `GET /v1/products/categories/{id}` - Get category by ID
+- `PATCH /v1/products/categories/{id}` - Update category
+- `DELETE /v1/products/categories/{id}` - Delete category (soft delete)
 
 ## Database Schema
 
@@ -257,6 +285,31 @@ freely/
 - `content` (text)
 - `metadata_json` (optional JSON data)
 - `created_at`, `modified_at`, `deleted_at`
+
+### categories
+- `id` (UUID, PK)
+- `name`, `slug` (indexed)
+- `description` (text, optional)
+- `organization_id` (FK → organizations)
+- `created_at`, `modified_at`, `deleted_at`
+
+### products
+- `id` (UUID, PK)
+- `name`, `slug` (indexed)
+- `description` (text, optional)
+- `price_cents` (integer, stored in cents)
+- `currency` (3-char ISO 4217, default: USD)
+- `image_urls` (array of strings)
+- `stock_available` (integer, nullable for unlimited)
+- `is_available` (boolean, for sale status)
+- `is_digital` (boolean, digital vs physical)
+- `organization_id` (FK → organizations)
+- `created_at`, `modified_at`, `deleted_at`
+
+### product_categories
+- `product_id` (FK → products)
+- `category_id` (FK → categories)
+- Composite PK (product_id, category_id)
 
 ## Design System
 
