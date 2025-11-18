@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Polar Color System - OKLCH Format */
+@layer base {
+  :root {
+    /* Blue (Primary) - OKLCH */
+    --color-blue-50: oklch(0.97 0.014 254.604);
+    --color-blue-100: oklch(0.932 0.032 255.585);
+    --color-blue-200: oklch(0.882 0.059 254.128);
+    --color-blue-300: oklch(0.809 0.105 251.813);
+    --color-blue-400: oklch(0.707 0.165 254.624);
+    --color-blue-500: oklch(0.623 0.214 259.815);
+    --color-blue-600: oklch(0.546 0.245 262.881);
+    --color-blue-700: oklch(0.488 0.243 264.376);
+    --color-blue-800: oklch(0.424 0.199 265.638);
+    --color-blue-900: oklch(0.379 0.146 265.522);
+    --color-blue-950: oklch(0.282 0.091 267.935);
+
+    /* Gray - OKLCH */
+    --color-gray-50: oklch(0.985 0.002 247.839);
+    --color-gray-100: oklch(0.967 0.003 264.542);
+    --color-gray-200: oklch(0.928 0.006 264.531);
+    --color-gray-300: oklch(0.872 0.01 258.338);
+    --color-gray-400: oklch(0.707 0.022 261.325);
+    --color-gray-500: oklch(0.551 0.027 264.364);
+    --color-gray-600: oklch(0.446 0.03 256.802);
+    --color-gray-700: oklch(0.373 0.034 259.733);
+    --color-gray-800: oklch(0.278 0.033 256.848);
+    --color-gray-900: oklch(0.21 0.034 264.665);
+    --color-gray-950: oklch(0.13 0.028 261.692);
+
+    /* Border Radius */
+    --radius: 0.6rem;
+
+    /* Semantic Colors - Light Mode */
+    --background: var(--color-gray-50);
+    --foreground: var(--color-gray-900);
+
+    --card: white;
+    --card-foreground: var(--color-gray-900);
+
+    --popover: white;
+    --popover-foreground: var(--color-gray-900);
+
+    --primary: var(--color-blue-600);
+    --primary-foreground: white;
+
+    --secondary: var(--color-gray-100);
+    --secondary-foreground: var(--color-gray-900);
+
+    --muted: var(--color-gray-100);
+    --muted-foreground: var(--color-gray-500);
+
+    --accent: var(--color-blue-600);
+    --accent-foreground: white;
+
+    --destructive: var(--color-red-500);
+    --destructive-foreground: white;
+
+    --border: var(--color-gray-200);
+    --input: var(--color-gray-200);
+    --ring: var(--color-gray-200);
+  }
+
+  .dark {
+    --background: hsl(233, 5%, 9.5%);
+    --foreground: hsl(233, 5%, 85%);
+
+    --card: hsl(233, 5%, 9.5%);
+    --card-foreground: hsl(233, 5%, 85%);
+
+    --popover: hsl(233, 5%, 6.5%);
+    --popover-foreground: hsl(233, 5%, 85%);
+
+    --primary: var(--color-blue-600);
+    --primary-foreground: hsl(233, 5%, 85%);
+
+    --secondary: hsl(233, 5%, 6.5%);
+    --secondary-foreground: hsl(233, 5%, 85%);
+
+    --muted: hsl(233, 5%, 12%);
+    --muted-foreground: hsl(233, 5%, 46%);
+
+    --accent: var(--color-blue-600);
+    --accent-foreground: hsl(233, 5%, 85%);
+
+    --destructive: var(--color-red-800);
+    --destructive-foreground: var(--color-red-500);
+
+    --border: hsl(233, 5%, 12%);
+    --input: hsl(233, 5%, 12%);
+    --ring: hsl(233, 5%, 12%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}

@@ -3,7 +3,7 @@
 from typing import TYPE_CHECKING
 from uuid import UUID
 
-from sqlalchemy import Boolean, ForeignKey, String, Table, Text
+from sqlalchemy import Boolean, Column, ForeignKey, String, Table, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Model, RecordModel
@@ -16,8 +16,8 @@ if TYPE_CHECKING:
 user_organizations = Table(
     "user_organizations",
     Model.metadata,
-    mapped_column("user_id", ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
-    mapped_column(
+    Column("user_id", ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+    Column(
         "organization_id", ForeignKey("organizations.id", ondelete="CASCADE"), primary_key=True
     ),
 )
