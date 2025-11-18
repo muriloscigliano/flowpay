@@ -138,15 +138,22 @@ Frontend will be available at: http://localhost:3000
 - ✅ Shopping cart page
 - ✅ Cart management (view, update quantities, remove)
 - ✅ Cart state management with composables
+- ✅ Customer order portal (order history)
+- ✅ Order detail page with full information
+- ✅ Order status displays (payment, fulfillment)
+- ✅ useOrders composable for order management
 - ✅ Auth state management
 - ✅ Protected routes
 - ✅ Responsive design
 
 ### Roadmap 🚧
 
-**Week 4:**
-- Customer portal
-- Order management
+**Future Enhancements:**
+- Stripe Elements payment form frontend
+- Order confirmation page after checkout
+- Email notifications for orders
+- Admin order fulfillment dashboard
+- Webhook handling for payment events
 - Subscriptions
 
 **Week 5:**
