@@ -9,7 +9,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .base import RecordModel
 
 if TYPE_CHECKING:
+    from .invoice import Invoice
     from .organization import Organization
+    from .subscription import Subscription
+    from .usage import APIKey
 
 
 class User(RecordModel):
@@ -43,6 +46,17 @@ class User(RecordModel):
         secondary="user_organizations",
         back_populates="users",
         lazy="raise",
+    )
+
+    # MoR relationships
+    subscriptions: Mapped[list["Subscription"]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
+    )
+    api_keys: Mapped[list["APIKey"]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
+    )
+    invoices: Mapped[list["Invoice"]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
     )
 
     def __repr__(self) -> str:
