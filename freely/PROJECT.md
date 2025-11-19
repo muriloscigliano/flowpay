@@ -1,14 +1,169 @@
-# Freely - Conversational Commerce Platform
+# Freely - Payment Platform for AI Builders
 
-## Project Vision & Goals
+## What Is Freely? (Non-Technical Explanation)
 
-**Created:** November 2025
-**Status:** Production-Ready (95% Complete)
-**Mission:** Build an independent conversational commerce platform that combines AI-powered customer chat with modern e-commerce functionality.
+**Freely is like Stripe, but specifically designed for people who sell AI products and services.**
+
+Think of it this way:
+- **Stripe** helps you accept credit cards and run subscriptions for any business
+- **Freely** helps you accept credit cards AND track how much your customers use your AI service (like API calls or AI-generated content)
+
+### The Problem We're Solving
+
+You're a freelancer who built an AI chatbot. Your customers use it to answer questions. You want to charge them:
+- **$29 per month** (base fee)
+- **Plus** $0.01 for every 1,000 messages their customers send
+
+This is called **"usage-based billing"** and it's surprisingly hard to set up. You'd need:
+1. Stripe for payments
+2. A database to track usage
+3. Code to calculate bills
+4. A system to generate invoices
+5. A dashboard for customers to see their usage
+6. Analytics to understand your business
+
+That could take **6 months to build**. Or... you could use Freely and be up and running in **5 minutes**.
+
+### Who Is This For?
+
+**Freelancers and indie developers who are building:**
+- AI chatbots (customer service, personal assistants)
+- AI content generators (blog posts, social media, images)
+- AI APIs (text-to-speech, image recognition, data analysis)
+- AI tools for specific industries (legal, healthcare, education)
+
+**Digital nomads and creators who want to:**
+- Monetize their AI side projects
+- Start charging for their AI experiments
+- Turn their AI tools into a real business
+
+**Micro SaaS founders who need:**
+- Professional billing without building it from scratch
+- Usage tracking built in
+- Beautiful customer portal out of the box
+
+### Why Did We Build This?
+
+**The Origin Story:**
+
+I was working on AgentPay (a payment platform) and realized I'd need to attribute the original project (Polar) in all my marketing because of the MIT license. That felt limiting.
+
+So I decided: **"Let's build it from scratch, but better."**
+
+**The Vision Evolved:**
+
+While rebuilding, I realized e-commerce is competitive and saturated. But you know what ISN'T saturated?
+
+**Tools for indie AI developers.**
+
+Every day, thousands of developers are building AI apps. And they all hit the same wall: **"How do I charge for this?"**
+
+Freely is the answer.
+
+### What Makes Freely Special?
+
+**1. Usage-Based Billing (Built In)**
+Your customers use your AI? You get paid automatically. No complex code needed.
+
+**2. Simple Pricing Plans**
+- Free tier: 1,000 API calls/month
+- Starter: $29/mo + overage
+- Pro: $99/mo + overage
+- Enterprise: Custom
+
+You set it up once. Freely handles the rest.
+
+**3. Customer Portal (Automatically)**
+Your customers get a beautiful dashboard showing:
+- How much they've used this month
+- Their bill breakdown
+- Payment history
+- Invoices (PDF download)
+
+**4. Analytics (For You)**
+See your business at a glance:
+- Monthly Recurring Revenue (MRR)
+- Customer churn rate
+- Which customers might cancel (health scores)
+- Usage patterns and trends
+
+**5. AI Chat (Bonus Feature)**
+Your customers can ask questions about their usage, billing, or orders through a chat interface powered by Claude AI.
+
+### Real-World Example
+
+**Meet Sarah:** She's a freelancer who built an AI tool that generates Instagram captions.
+
+**Before Freely:**
+- Built billing system: 4 weeks
+- Stripe integration: 1 week
+- Usage tracking: 2 weeks
+- Customer dashboard: 2 weeks
+- Invoicing: 1 week
+- **Total: 10 weeks of work** (and she's not even a backend developer!)
+
+**After Freely:**
+- Sign up for Freely
+- Create a pricing plan: "$19/mo + $0.10 per 100 captions"
+- Copy API key into her app
+- Track usage with one line of code: `freely.trackUsage('caption_generated', 1)`
+- **Total: 30 minutes**
+
+Now Sarah focuses on making her AI better instead of building billing infrastructure.
+
+### How It Works (Simple Version)
+
+1. **You sign up** and create a pricing plan
+2. **Your customers subscribe** through Freely's checkout
+3. **Your app tracks usage** (API calls, tokens, whatever you sell)
+4. **Freely generates invoices** monthly with base fee + usage
+5. **Customers pay automatically** via Stripe
+6. **You get paid** (minus Freely's small fee)
+
+### Our Business Model
+
+**How Freely Makes Money:**
+- 2.9% + $0.30 per transaction (Stripe's fee + tiny margin)
+- Platform fee: $99-999/month based on your revenue
+- Enterprise: Custom pricing for high-volume
+
+**Why This Works:**
+- We grow when you grow
+- Aligned incentives
+- Fair pricing (not exploitative)
+
+### Current Status (November 2025)
+
+**What's Built:**
+- ✅ Complete subscription system
+- ✅ Usage tracking and metering
+- ✅ Invoice generation
+- ✅ Customer portal
+- ✅ Analytics dashboard
+- ✅ Stripe integration
+- ✅ AI chat interface
+- ✅ Beautiful UI
+
+**What's Next:**
+- Service layer (business logic)
+- API endpoints (so you can integrate)
+- Frontend dashboard (for you to manage everything)
+- Documentation (how to use it)
+- Launch 🚀
+
+### The Big Picture
+
+**Stripe democratized payments** - anyone can accept credit cards now.
+
+**Freely will democratize usage-based billing** - anyone can charge for AI usage now.
+
+**Indie developers shouldn't waste months building billing.** They should build amazing AI products and use Freely to monetize them.
+
+That's the mission. That's why Freely exists.
 
 ---
 
-## 🎯 Original Goals
+## 🎯 Original Goals (Technical Details)
 
 ### Primary Objectives
 1. **Independence from Polar**
